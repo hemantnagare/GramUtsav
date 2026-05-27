@@ -4,23 +4,24 @@ import com.gramutsav.dto.LoginRequest;
 import com.gramutsav.entity.Users;
 import com.gramutsav.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
 
+    @PostMapping("/login")
     public Map<String,String> Login(@RequestBody LoginRequest request )
     {
-           Users user = userRepository.FindUsersByEmail(request.getEmail());
+
+        Users user = userRepository.findUsersByMobilenumber(request.getMobileno());
         Map<String, String> response = new HashMap<>();
 
         if (user != null && user.getPassword().equals(request.getPassword())) {
@@ -32,7 +33,6 @@ public class AuthController {
 
             response.put("message", "Invalid Credentials");
         }
-
         return response;
     }
 }

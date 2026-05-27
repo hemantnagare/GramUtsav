@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<Users,Integer> {
 
-    Users FindUsersByEmail( String email);
+   Users findUsersByMobilenumber(String mobileNumber);
 }
