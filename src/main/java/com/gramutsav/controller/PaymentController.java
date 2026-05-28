@@ -1,6 +1,9 @@
 package com.gramutsav.controller;
 
+import com.gramutsav.dto.PaymentReportDto;
 import com.gramutsav.entity.PaymentDetails;
+import com.gramutsav.repository.PaymentRepository;
+import com.gramutsav.service.PaymentService;
 import com.gramutsav.service.PhonePeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,12 @@ public class PaymentController {
 
     @Autowired
     private PhonePeService phonePeService;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @PostMapping("/pay")
     public String pay(
@@ -61,5 +70,14 @@ public class PaymentController {
                         );
 
         return ResponseEntity.ok(payment);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<List<PaymentReportDto>> getPaymentReport() {
+
+        List<PaymentReportDto> report =
+                paymentService.getPaymentReport();
+
+        return ResponseEntity.ok(report);
     }
 }

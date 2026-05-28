@@ -9,4 +9,7 @@ import java.util.List;
 public interface KhatedarMahitiRepository extends JpaRepository<KhatedarMahiti,Long> {
 
     List<KhatedarMahiti>  findByMobileNo(String mobileNo);
+
+    List<KhatedarMahiti> findAllByOrderByKhateKramankAsc();
+
 }

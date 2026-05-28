@@ -146,15 +146,12 @@ public class PhonePeService {
 
 
         );
-        System.out.println("mail message=>"+message);
+        //System.out.println("mail message=>"+message);
         mailSender.send(message);
     }
 
 
-    public PaymentDetails checkPaymentStatus(
-            String merchantOrderId
-    ) {
-        System.out.println("api1 merchantOrderId=>"+merchantOrderId);
+    public PaymentDetails checkPaymentStatus(String merchantOrderId) {
         PaymentDetails payment =paymentRepository.findByOrderId(merchantOrderId);
 
         try {
@@ -174,7 +171,14 @@ public class PhonePeService {
                 payment.setPaymentStatus(
                         "SUCCESS"
                 );
+                if (payment.getReceiptNo() == null) {
 
+                    Long count =paymentRepository.count();
+                    System.out.println("count"+count);
+                    String receiptNo =String.format("यात्रा/%d",count + 1);
+
+                    payment.setReceiptNo(receiptNo);
+                }
                 paymentRepository.save(payment);
             }
             else if(state.equals("FAILED")) {

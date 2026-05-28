@@ -35,6 +35,17 @@ public class PaymentDetails {
 
     private LocalDateTime paymentDate;
 
+    @Column(unique = true)
+    private String receiptNo;
+
+    public String getReceiptNo() {
+        return receiptNo;
+    }
+
+    public void setReceiptNo(String receiptNo) {
+        this.receiptNo = receiptNo;
+    }
+
     public Long getPaymentDetailsid() {
         return PaymentDetailsid;
     }

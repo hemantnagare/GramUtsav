@@ -31,4 +31,13 @@ public class ShareHolderController {
 
         return ResponseEntity.ok(list);
     }
+
+    @GetMapping("/all")
+    public  ResponseEntity<List<KhatedarMahiti>> getAll() {
+        List<KhatedarMahiti> list =khdmRepository.findAllByOrderByKhateKramankAsc();
+        if (list.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(list);
+    }
 }
