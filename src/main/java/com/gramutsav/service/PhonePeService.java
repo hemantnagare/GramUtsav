@@ -48,7 +48,7 @@ public class PhonePeService {
                             .merchantOrderId(merchantOrderId)
                             .amount(amount * 100)
                             .redirectUrl(
-                                    "http://localhost:5173/payment-success?merchantOrderId="
+                                    "https://gramutsav.vercel.app/payment-success?merchantOrderId="
                                             + merchantOrderId
                             )
                             .metaInfo(metaInfo)
