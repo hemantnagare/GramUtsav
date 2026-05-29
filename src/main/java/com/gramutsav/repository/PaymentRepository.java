@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface PaymentRepository
-        extends JpaRepository<PaymentDetails, Long> {
+public interface PaymentRepository extends JpaRepository<PaymentDetails, Long> {
 
-    PaymentDetails findByOrderId(String orderId);
+    PaymentDetails save(PaymentDetails paymentDetails);
+
+     PaymentDetails findByOrderId(String orderId);
 
     @Query(value = """
             SELECT\s
